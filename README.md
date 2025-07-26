@@ -114,7 +114,7 @@ SmartScan/
 1. 克隆项目到本地
 
    ```bash
-   git clone https://github.com/yourusername/SmartScan.git
+   git clone https://github.com/liyongcheng94/SmartScan.git
    ```
 
 2. 使用 Android Studio 打开项目
@@ -166,9 +166,9 @@ SmartScan/
 
 如有问题或建议，请通过以下方式联系：
 
-- 项目 Issues：[GitHub Issues](https://github.com/yourusername/SmartScan/issues)
-- 邮箱：your.email@example.com
+- 项目 Issues：[GitHub Issues](https://github.com/liyongcheng94/SmartScan/issues)
+- 邮箱：1558139110@qq.com
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by [liyongcheng94]**
