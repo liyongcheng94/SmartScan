@@ -19,3 +19,30 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# POI Excel library rules
+-dontwarn java.awt.**
+-dontwarn javax.xml.stream.**
+-dontwarn net.sf.saxon.**
+-dontwarn org.apache.batik.**
+-dontwarn org.osgi.framework.**
+
+# Keep POI classes
+-keep class org.apache.poi.** { *; }
+-keep class org.apache.xmlbeans.** { *; }
+
+# ZXing barcode library
+-keep class com.google.zxing.** { *; }
+-keep class com.journeyapps.barcodescanner.** { *; }
+
+# Room database
+-keep class androidx.room.** { *; }
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-keep @androidx.room.Dao class *
+
+# Camera2 API
+-keep class androidx.camera.** { *; }
+
+# Dexter permissions
+-keep class com.karumi.dexter.** { *; }

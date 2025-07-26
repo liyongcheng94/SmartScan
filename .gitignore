@@ -2,6 +2,12 @@
 *.apk
 *.aab
 
+# Keystore files
+# Uncomment the following lines if you do not want to check your keystore files in.
+*.jks
+*.keystore
+keystore.properties
+
 # Files for the ART/Dalvik VM
 *.dex
 
