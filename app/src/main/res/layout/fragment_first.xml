@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/background_light" tools:context=".FirstFragment">
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+		<!-- 应用标题区域 -->
+		<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" app:cardCornerRadius="16dp" app:cardElevation="4dp" app:cardBackgroundColor="@color/primary_blue">
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp" android:gravity="center">
+				<ImageView android:layout_width="64dp" android:layout_height="64dp" android:layout_marginBottom="16dp" android:src="@android:drawable/ic_menu_camera" app:tint="@color/white" />
+				<TextView android:id="@+id/app_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_name" android:textSize="28sp" android:textStyle="bold" android:textColor="@color/white" android:layout_marginBottom="8dp" />
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_description" android:textSize="14sp" android:textColor="@color/primary_blue_light" android:textAlignment="center" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+		<!-- 功能按钮区域 -->
+		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginBottom="24dp">
+			<!-- 单次扫描按钮 -->
+			<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="12dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/background_card">
+				<LinearLayout android:id="@+id/button_first" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical" android:background="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+					<ImageView android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_camera" app:tint="@color/primary_blue" android:layout_marginEnd="16dp" />
+					<LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/single_scan" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_marginBottom="4dp" />
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="快速扫描单个二维码或条形码" android:textSize="14sp" android:textColor="@color/text_secondary" />
+					</LinearLayout>
+					<ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_media_play" app:tint="@color/text_hint" />
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+			<!-- 批量扫描按钮 -->
+			<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="12dp" app:cardCornerRadius="12dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/background_card">
+				<LinearLayout android:id="@+id/button_batch_scan" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical" android:background="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+					<ImageView android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_gallery" app:tint="@color/accent_green" android:layout_marginEnd="16dp" />
+					<LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/batch_scan" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_marginBottom="4dp" />
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="连续扫描多个码，自动去重" android:textSize="14sp" android:textColor="@color/text_secondary" />
+					</LinearLayout>
+					<ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_media_play" app:tint="@color/text_hint" />
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+			<!-- 历史记录按钮 -->
+			<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="12dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/background_card">
+				<LinearLayout android:id="@+id/button_history" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="20dp" android:gravity="center_vertical" android:background="?android:attr/selectableItemBackground" android:clickable="true" android:focusable="true">
+					<ImageView android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_recent_history" app:tint="@color/accent_orange" android:layout_marginEnd="16dp" />
+					<LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/scan_history" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_marginBottom="4dp" />
+						<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="查看和导出扫描记录" android:textSize="14sp" android:textColor="@color/text_secondary" />
+					</LinearLayout>
+					<ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_media_play" app:tint="@color/text_hint" />
+				</LinearLayout>
+			</androidx.cardview.widget.CardView>
+		</LinearLayout>
+		<!-- 功能特点区域 -->
+		<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" app:cardCornerRadius="12dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/background_card">
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="功能特点" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/text_primary" android:layout_marginBottom="12dp" />
+				<TextView android:id="@+id/textview_first" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/feature_list" android:textSize="14sp" android:textColor="@color/text_secondary" android:lineSpacingExtra="4dp" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+		<!-- 版权信息区域 -->
+		<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="12dp" app:cardElevation="2dp" app:cardBackgroundColor="@color/background_card">
+			<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" android:gravity="center">
+				<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/copyright_info" android:textSize="12sp" android:textColor="@color/text_hint" android:textAlignment="center" android:lineSpacingExtra="2dp" />
+			</LinearLayout>
+		</androidx.cardview.widget.CardView>
+	</LinearLayout>
+</androidx.core.widget.NestedScrollView>

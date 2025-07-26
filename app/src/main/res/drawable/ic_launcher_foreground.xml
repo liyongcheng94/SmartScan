@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+	<!-- 二维码扫描主题图标 -->
+	<!-- 外层圆形背景 -->
+	<path android:fillColor="#2196F3" android:pathData="M54,54m-45,0a45,45 0,1 1,90 0a45,45 0,1 1,-90 0" />
+	<!-- 内层白色圆形 -->
+	<path android:fillColor="#FFFFFF" android:pathData="M54,54m-38,0a38,38 0,1 1,76 0a38,38 0,1 1,-76 0" />
+	<!-- 二维码图案 -->
+	<!-- 左上角方块 -->
+	<path android:fillColor="#2196F3" android:pathData="M28,28h14v14h-14z" />
+	<path android:fillColor="#FFFFFF" android:pathData="M30,30h10v10h-10z" />
+	<path android:fillColor="#2196F3" android:pathData="M32,32h6v6h-6z" />
+	<!-- 右上角方块 -->
+	<path android:fillColor="#2196F3" android:pathData="M66,28h14v14h-14z" />
+	<path android:fillColor="#FFFFFF" android:pathData="M68,30h10v10h-10z" />
+	<path android:fillColor="#2196F3" android:pathData="M70,32h6v6h-6z" />
+	<!-- 左下角方块 -->
+	<path android:fillColor="#2196F3" android:pathData="M28,66h14v14h-14z" />
+	<path android:fillColor="#FFFFFF" android:pathData="M30,68h10v10h-10z" />
+	<path android:fillColor="#2196F3" android:pathData="M32,70h6v6h-6z" />
+	<!-- 中间的扫描图案 -->
+	<path android:fillColor="#2196F3" android:pathData="M46,46h4v4h-4z" />
+	<path android:fillColor="#2196F3" android:pathData="M58,46h4v4h-4z" />
+	<path android:fillColor="#2196F3" android:pathData="M52,50h4v4h-4z" />
+	<path android:fillColor="#2196F3" android:pathData="M46,58h4v4h-4z" />
+	<path android:fillColor="#2196F3" android:pathData="M58,58h4v4h-4z" />
+	<path android:fillColor="#2196F3" android:pathData="M50,54h8v2h-8z" />
+	<!-- 扫描线效果 -->
+	<path android:fillColor="#4CAF50" android:pathData="M25,54h58v3h-58z" android:fillAlpha="0.8" />
+</vector>

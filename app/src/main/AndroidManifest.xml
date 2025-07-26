@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+	<!-- 摄像头权限 -->
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-feature android:name="android.hardware.camera" android:required="true" />
+	<!-- 存储权限 (用于导出Excel) -->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:ignore="ScopedStorage" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+	<!-- Android 13及以上版本的媒体权限 (可选，用于读取媒体文件) -->
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+	<uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+	<!-- 管理外部存储权限 (Android 11+可选，用于访问所有文件) -->
+	<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+	<application android:allowBackup="true" android:dataExtractionRules="@xml/data_extraction_rules" android:fullBackupContent="@xml/backup_rules" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.Smart_scan">
+		<activity android:name=".MainActivity" android:exported="true" android:theme="@style/Theme.Smart_scan">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<!-- 扫描Activity -->
+		<activity android:name=".ScanActivity" android:exported="false" android:screenOrientation="portrait" android:theme="@style/Theme.Smart_scan" />
+		<!-- 历史记录Activity -->
+		<activity android:name=".HistoryActivity" android:exported="false" android:theme="@style/Theme.Smart_scan" />
+		<!-- 批量扫描Activity -->
+		<activity android:name=".BatchScanActivity" android:exported="false" android:screenOrientation="portrait" android:theme="@style/Theme.Smart_scan" />
+		<!-- FileProvider用于分享文件 -->
+		<provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
+		</provider>
+	</application>
+</manifest>

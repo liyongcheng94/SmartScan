@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="black">
+		#FF000000
+	</color>
+	<color name="white">
+		#FFFFFFFF
+	</color>
+	<!-- 主色调 - 现代蓝色 -->
+	<color name="primary_blue">
+		#2196F3
+	</color>
+	<color name="primary_blue_dark">
+		#1976D2
+	</color>
+	<color name="primary_blue_light">
+		#E3F2FD
+	</color>
+	<!-- 辅助色调 -->
+	<color name="accent_green">
+		#4CAF50
+	</color>
+	<color name="accent_orange">
+		#FF9800
+	</color>
+	<color name="accent_red">
+		#F44336
+	</color>
+	<!-- 背景色 -->
+	<color name="background_light">
+		#FAFAFA
+	</color>
+	<color name="background_white">
+		#FFFFFF
+	</color>
+	<color name="background_card">
+		#FFFFFF
+	</color>
+	<!-- 表面颜色 -->
+	<color name="surface_color">
+		#FFFFFF
+	</color>
+	<!-- 文本色 -->
+	<color name="text_primary">
+		#212121
+	</color>
+	<color name="text_secondary">
+		#757575
+	</color>
+	<color name="text_hint">
+		#BDBDBD
+	</color>
+	<!-- 边框和分割线 -->
+	<color name="divider">
+		#E0E0E0
+	</color>
+	<color name="border_light">
+		#EEEEEE
+	</color>
+	<!-- 阴影 -->
+	<color name="shadow">
+		#1F000000
+	</color>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" app:cardCornerRadius="8dp" app:cardElevation="4dp" android:foreground="?android:attr/selectableItemBackground" android:clickable="true">
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+		<!-- 内容 -->
+		<TextView android:id="@+id/content_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="扫描内容" android:textSize="16sp" android:textStyle="bold" android:maxLines="3" android:ellipsize="end" />
+		<!-- 详细信息 -->
+		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp">
+			<TextView android:id="@+id/format_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="QR_CODE" android:textSize="12sp" android:background="@android:color/holo_green_light" android:textColor="@android:color/white" android:padding="4dp" android:layout_marginEnd="8dp" />
+			<TextView android:id="@+id/time_text" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="2024-01-01 12:34:56" android:textSize="12sp" android:textColor="@android:color/darker_gray" />
+		</LinearLayout>
+		<!-- 批次信息 -->
+		<TextView android:id="@+id/batch_text" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="批次: batch_12345" android:textSize="11sp" android:textColor="@android:color/darker_gray" android:layout_marginTop="4dp" />
+	</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">智能扫描</string>
+    <string name="app_version">版本 1.0.0</string>
+    <string name="app_description">专业的二维码和条形码扫描工具，支持批量扫描、历史记录管理和Excel导出功能。适用于库存管理、产品追踪等多种应用场景。</string>
+    <string name="first_fragment_label">智能扫描</string>
+    <string name="second_fragment_label">关于应用</string>
+    <string name="next">下一步</string>
+    <string name="previous">上一步</string>
+    <string name="single_scan">单次扫描</string>
+    <string name="batch_scan">批量扫描</string>
+    <string name="scan_history">查看历史</string>
+    <string name="feature_list">功能特性</string>
+    <string name="view_history">查看历史</string>
+    <string name="export_excel">导出Excel</string>
+    <string name="action_settings">设置</string>
+    <string name="about_content">这是一个专业的扫描应用</string>
+    <string name="features_title">主要功能</string>
+    <string name="feature_batch_scan">• 批量扫描二维码和条形码</string>
+    <string name="feature_history">• 扫描历史记录查看</string>
+    <string name="feature_excel_export">• Excel格式导出功能</string>
+    <string name="feature_multiple_formats">• 支持15+种码制格式</string>
+    <string name="developer_info_title">开发者信息</string>
+    <string name="developer_name">开发者：李勇城</string>
+    <string name="developer_email">联系邮箱：1558139110@qq.com</string>
+    <string name="copyright_info">版权所有 © 2025 李勇城</string>
+    <string name="tech_info_title">技术信息</string>
+    <string name="tech_framework">• 基于 Android SDK 开发</string>
+    <string name="tech_libraries">• 使用 ZXing 扫描库和 Apache POI</string>
+    <string name="tech_database">• Room 数据库本地存储</string>
+</resources>
