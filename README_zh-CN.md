@@ -18,10 +18,10 @@
 - 🧾 自动提取发票号码、金额和日期
 - 📊 多种导出选项：今天记录、全部记录或最新批次
 - 🔒 本地数据存储，保护隐私安全(https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
-[![Download APK](https://img.shields.io/badge/Download-APK-green)](https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
-[![License](https://img.shields.io/github/license/liyongcheng94/SmartScan)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com)
-[![API Level](https://img.shields.io/badge/API-26%2B-orange)](https://developer.android.com/guide/topics/manifest/uses-sdk-element)
+  [![Download APK](https://img.shields.io/badge/Download-APK-green)](https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
+  [![License](https://img.shields.io/github/license/liyongcheng94/SmartScan)](LICENSE)
+  [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com)
+  [![API Level](https://img.shields.io/badge/API-26%2B-orange)](https://developer.android.com/guide/topics/manifest/uses-sdk-element)
 
 **🚀 直接下载**: [SmartScan v1.0.0 APK](https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
 
