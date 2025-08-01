@@ -40,12 +40,15 @@ After installation, you can immediately experience the following features:
 - **Real-time Scanning**: Support real-time QR code and barcode recognition
 - **Batch Scanning**: Scan multiple codes at once to improve work efficiency
 - **History Management**: Automatically save scan records for easy viewing and management
-- **Data Export**: Export scan results to Excel files
+- **Data Export**: Export scan results to Excel files with automatic invoice information parsing
+- **Invoice Processing**: Automatically extract invoice number, amount, and date from QR code content
 
 ### 🛠️ Technical Features
 
 - **High Precision Recognition**: Advanced image recognition algorithms
 - **Fast Response**: Optimized scanning engine with quick recognition speed
+- **Smart Data Parsing**: Automatically parse invoice information from scan content
+- **Flexible Export Options**: Support exporting today's, all, or latest batch scan results
 - **User Friendly**: Clean and intuitive user interface
 - **Data Security**: Local storage to protect user privacy
 - **Offline Operation**: No network permissions required, completely offline operation, preventing information leaks
@@ -95,9 +98,12 @@ After installation, you can immediately experience the following features:
 
 ### 4. Data Export
 
-- Excel format export
-- Custom file names
+- Excel format export with intelligent invoice information parsing
+- Support exporting today's records, all records, or latest batch
+- Automatic extraction of invoice number, amount, and date fields
+- Custom file names with timestamp
 - Share function support
+- Batch export directly from scanning interface
 
 ## Technology Stack
 
@@ -201,13 +207,15 @@ The app requires the following permissions to function properly:
 
 ### Version History
 
-#### v1.0.0 (2025-07-26)
+#### v1.0.0 (2025-08-01)
 
 - ✨ First official release
 - 📱 Real-time QR code/barcode scanning support
-- 📊 Batch scanning functionality
-- 📋 Scan history management
-- 📤 Excel format data export
+- 📊 Batch scanning functionality with export capability
+- 📋 Enhanced scan history management
+- 📤 Excel format data export with invoice information parsing
+- 🧾 Automatic extraction of invoice number, amount, and date
+- 📊 Multiple export options: today's records, all records, or latest batch
 - 🔒 Local data storage for privacy protection
 
 ## Contributing

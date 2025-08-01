@@ -8,7 +8,16 @@
 
 ### 最新版本: v1.0.0
 
-[![GitHub Release](https://img.shields.io/github/v/release/liyongcheng94/SmartScan)](https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
+[![GitHub Release](https://img.shields.io/github/v/release/liyongcheng94/Sma#### v1.0.0 (2025-08-01)
+
+- ✨ 首个正式版本发布
+- 📱 支持实时二维码/条形码扫描
+- 📊 批量扫描功能，支持导出
+- 📋 增强的扫描历史记录管理
+- 📤 Excel 格式数据导出，支持发票信息解析
+- 🧾 自动提取发票号码、金额和日期
+- 📊 多种导出选项：今天记录、全部记录或最新批次
+- 🔒 本地数据存储，保护隐私安全(https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
 [![Download APK](https://img.shields.io/badge/Download-APK-green)](https://github.com/liyongcheng94/SmartScan/releases/tag/v1.0.0)
 [![License](https://img.shields.io/github/license/liyongcheng94/SmartScan)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Android-brightgreen)](https://developer.android.com)
@@ -40,12 +49,15 @@
 - **实时扫描**：支持二维码和条形码的实时扫描识别
 - **批量扫描**：一次性扫描多个码，提高工作效率
 - **历史记录**：自动保存扫描记录，便于查看和管理
-- **数据导出**：支持将扫描结果导出为 Excel 文件
+- **数据导出**：支持将扫描结果导出为 Excel 文件，并自动解析发票信息
+- **发票处理**：自动从二维码内容中提取发票号码、金额和日期
 
 ### 🛠️ 技术特性
 
 - **高精度识别**：采用先进的图像识别算法
 - **快速响应**：优化的扫描引擎，识别速度快
+- **智能数据解析**：自动从扫描内容中解析发票信息
+- **灵活导出选项**：支持导出今天、全部或最新批次的扫描结果
 - **用户友好**：简洁直观的用户界面
 - **数据安全**：本地存储，保护用户隐私
 - **离线运行**：无需联网权限，完全离线操作，杜绝信息泄露
@@ -95,9 +107,12 @@
 
 ### 4. 数据导出
 
-- Excel 格式导出
-- 自定义文件名
+- Excel 格式导出，支持智能发票信息解析
+- 支持导出今天记录、全部记录或最新批次
+- 自动提取发票号码、金额和日期字段
+- 自定义文件名，包含时间戳
 - 支持分享功能
+- 批量扫描界面直接导出当前批次
 
 ## 技术栈
 

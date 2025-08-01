@@ -72,15 +72,36 @@ public class HistoryActivity extends AppCompatActivity {
   }
 
   private void onItemClick(ScanResult scanResult) {
+    // 解析发票信息
+    String[] invoiceInfo = parseInvoiceInfo(scanResult.getContent());
+
+    // 构建详情信息
+    StringBuilder detailMessage = new StringBuilder();
+    detailMessage.append("内容: ").append(scanResult.getContent()).append("\n")
+        .append("格式: ").append(scanResult.getFormat()).append("\n")
+        .append("时间: ").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            .format(new Date(scanResult.getTimestamp())))
+        .append("\n")
+        .append("批次: ").append(scanResult.getBatchId());
+
+    // 如果有发票信息，则显示
+    if (!invoiceInfo[0].isEmpty() || !invoiceInfo[1].isEmpty() || !invoiceInfo[2].isEmpty()) {
+      detailMessage.append("\n\n--- 发票信息 ---");
+      if (!invoiceInfo[0].isEmpty()) {
+        detailMessage.append("\n发票号码: ").append(invoiceInfo[0]);
+      }
+      if (!invoiceInfo[1].isEmpty()) {
+        detailMessage.append("\n金额: ").append(invoiceInfo[1]);
+      }
+      if (!invoiceInfo[2].isEmpty()) {
+        detailMessage.append("\n日期: ").append(invoiceInfo[2]);
+      }
+    }
+
     // 点击历史记录项的处理
     new AlertDialog.Builder(this)
         .setTitle("扫描结果详情")
-        .setMessage("内容: " + scanResult.getContent() + "\n" +
-            "格式: " + scanResult.getFormat() + "\n" +
-            "时间: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                .format(new Date(scanResult.getTimestamp()))
-            + "\n" +
-            "批次: " + scanResult.getBatchId())
+        .setMessage(detailMessage.toString())
         .setPositiveButton("复制", (dialog, which) -> {
           android.content.ClipboardManager clipboard = (android.content.ClipboardManager) getSystemService(
               CLIPBOARD_SERVICE);
@@ -109,20 +130,40 @@ public class HistoryActivity extends AppCompatActivity {
       }
     }
 
-    String[] options = {
-        "导出今天 (" + todayCount + " 条记录)",
-        "导出全部 (" + allResults.size() + " 条记录)"
-    };
+    // 获取最新批次ID和该批次的数据数量
+    String latestBatchId = getLatestBatchId();
+    long batchCount = 0;
+    if (latestBatchId != null && !latestBatchId.isEmpty()) {
+      for (ScanResult result : allResults) {
+        if (latestBatchId.equals(result.getBatchId())) {
+          batchCount++;
+        }
+      }
+    }
+
+    // 构建选项列表
+    java.util.List<String> optionsList = new java.util.ArrayList<>();
+    optionsList.add("导出今天 (" + todayCount + " 条记录)");
+    optionsList.add("导出全部 (" + allResults.size() + " 条记录)");
+
+    if (latestBatchId != null && !latestBatchId.isEmpty() && batchCount > 0) {
+      optionsList.add("导出最新批次 (" + batchCount + " 条记录)");
+    }
+
+    String[] options = optionsList.toArray(new String[0]);
 
     new AlertDialog.Builder(this)
         .setTitle("选择导出范围")
         .setItems(options, (dialog, which) -> {
           if (which == 0) {
             // 导出今天
-            exportData(true);
-          } else {
+            exportData(true, false, null);
+          } else if (which == 1) {
             // 导出全部
-            exportData(false);
+            exportData(false, false, null);
+          } else if (which == 2) {
+            // 导出最新批次
+            exportData(false, true, latestBatchId);
           }
         })
         .setNegativeButton("取消", null)
@@ -147,9 +188,11 @@ public class HistoryActivity extends AppCompatActivity {
     return calendar.getTimeInMillis();
   }
 
-  private void exportData(boolean todayOnly) {
+  private void exportData(boolean todayOnly, boolean batchOnly, String batchId) {
     try {
       List<ScanResult> dataToExport;
+      String exportType;
+
       if (todayOnly) {
         long todayStart = getTodayStartTimestamp();
         long todayEnd = getTodayEndTimestamp();
@@ -161,27 +204,48 @@ public class HistoryActivity extends AppCompatActivity {
             dataToExport.add(result);
           }
         }
+        exportType = "今天";
 
         if (dataToExport.isEmpty()) {
           Toast.makeText(this, "今天没有扫描数据", Toast.LENGTH_SHORT).show();
           return;
         }
+      } else if (batchOnly && batchId != null) {
+        // 过滤指定批次的数据
+        dataToExport = new java.util.ArrayList<>();
+        for (ScanResult result : allResults) {
+          if (batchId.equals(result.getBatchId())) {
+            dataToExport.add(result);
+          }
+        }
+        exportType = "批次_" + batchId;
+
+        if (dataToExport.isEmpty()) {
+          Toast.makeText(this, "该批次没有扫描数据", Toast.LENGTH_SHORT).show();
+          return;
+        }
       } else {
         dataToExport = allResults;
+        exportType = "全部";
       }
 
-      checkStoragePermissionAndExport(dataToExport, todayOnly);
+      checkStoragePermissionAndExport(dataToExport, exportType);
     } catch (Exception e) {
       Toast.makeText(this, "准备导出数据失败: " + e.getMessage(), Toast.LENGTH_LONG).show();
     }
   }
 
-  private void checkStoragePermissionAndExport() {
-    // 保持原有方法的兼容性，默认导出全部
-    checkStoragePermissionAndExport(allResults, false);
+  // 保持向后兼容性的重载方法
+  private void exportData(boolean todayOnly) {
+    exportData(todayOnly, false, null);
   }
 
-  private void checkStoragePermissionAndExport(List<ScanResult> dataToExport, boolean todayOnly) {
+  private void checkStoragePermissionAndExport() {
+    // 保持原有方法的兼容性，默认导出全部
+    checkStoragePermissionAndExport(allResults, "全部");
+  }
+
+  private void checkStoragePermissionAndExport(List<ScanResult> dataToExport, String exportType) {
     try {
       if (dataToExport == null || dataToExport.isEmpty()) {
         Toast.makeText(this, "没有数据可导出", Toast.LENGTH_SHORT).show();
@@ -190,7 +254,7 @@ public class HistoryActivity extends AppCompatActivity {
 
       // Android 10及以上版本使用应用内部存储，不需要存储权限
       if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
-        exportToExcelWithSAF(dataToExport, todayOnly);
+        exportToExcelWithSAF(dataToExport, exportType);
       } else {
         // Android 9及以下版本需要存储权限
         if (ContextCompat.checkSelfPermission(this,
@@ -203,7 +267,7 @@ public class HistoryActivity extends AppCompatActivity {
               },
               STORAGE_PERMISSION_REQUEST);
         } else {
-          exportToExcelLegacy(dataToExport, todayOnly);
+          exportToExcelLegacy(dataToExport, exportType);
         }
       }
     } catch (Exception e) {
@@ -212,16 +276,15 @@ public class HistoryActivity extends AppCompatActivity {
   }
 
   private void exportToExcelWithSAF() {
-    exportToExcelWithSAF(allResults, false);
+    exportToExcelWithSAF(allResults, "全部");
   }
 
-  private void exportToExcelWithSAF(List<ScanResult> dataToExport, boolean todayOnly) {
+  private void exportToExcelWithSAF(List<ScanResult> dataToExport, String exportType) {
     if (dataToExport == null || dataToExport.isEmpty()) {
       Toast.makeText(this, "没有数据可导出", Toast.LENGTH_SHORT).show();
       return;
     }
 
-    String exportType = todayOnly ? "今天" : "全部";
     Toast.makeText(this, "正在导出" + exportType + "数据到Excel文件...", Toast.LENGTH_SHORT).show();
 
     new Thread(() -> {
@@ -260,16 +323,15 @@ public class HistoryActivity extends AppCompatActivity {
   }
 
   private void exportToExcelLegacy() {
-    exportToExcelLegacy(allResults, false);
+    exportToExcelLegacy(allResults, "全部");
   }
 
-  private void exportToExcelLegacy(List<ScanResult> dataToExport, boolean todayOnly) {
+  private void exportToExcelLegacy(List<ScanResult> dataToExport, String exportType) {
     if (dataToExport == null || dataToExport.isEmpty()) {
       Toast.makeText(this, "没有数据可导出", Toast.LENGTH_SHORT).show();
       return;
     }
 
-    String exportType = todayOnly ? "今天" : "全部";
     Toast.makeText(this, "正在导出" + exportType + "数据到Excel文件...", Toast.LENGTH_SHORT).show();
 
     new Thread(() -> {
@@ -330,6 +392,9 @@ public class HistoryActivity extends AppCompatActivity {
       headerRow.createCell(2).setCellValue("格式");
       headerRow.createCell(3).setCellValue("扫描时间");
       headerRow.createCell(4).setCellValue("批次ID");
+      headerRow.createCell(5).setCellValue("发票号码");
+      headerRow.createCell(6).setCellValue("金额");
+      headerRow.createCell(7).setCellValue("日期");
 
       // 填充数据
       SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -341,6 +406,12 @@ public class HistoryActivity extends AppCompatActivity {
         row.createCell(2).setCellValue(result.getFormat() != null ? result.getFormat() : "");
         row.createCell(3).setCellValue(dateFormat.format(new Date(result.getTimestamp())));
         row.createCell(4).setCellValue(result.getBatchId() != null ? result.getBatchId() : "");
+
+        // 解析二维码内容提取发票信息
+        String[] invoiceInfo = parseInvoiceInfo(result.getContent());
+        row.createCell(5).setCellValue(invoiceInfo[0]); // 发票号码
+        row.createCell(6).setCellValue(invoiceInfo[1]); // 金额
+        row.createCell(7).setCellValue(invoiceInfo[2]); // 日期
       }
 
       // 手动设置列宽，避免使用 autoSizeColumn()
@@ -350,6 +421,9 @@ public class HistoryActivity extends AppCompatActivity {
       sheet.setColumnWidth(2, 15 * 256); // 格式列：15字符宽度
       sheet.setColumnWidth(3, 20 * 256); // 时间列：20字符宽度
       sheet.setColumnWidth(4, 15 * 256); // 批次ID列：15字符宽度
+      sheet.setColumnWidth(5, 20 * 256); // 发票号码列：20字符宽度
+      sheet.setColumnWidth(6, 15 * 256); // 金额列：15字符宽度
+      sheet.setColumnWidth(7, 15 * 256); // 日期列：15字符宽度
 
       // 确保父目录存在
       File parentDir = file.getParentFile();
@@ -471,5 +545,85 @@ public class HistoryActivity extends AppCompatActivity {
         Toast.makeText(this, "需要存储权限才能导出文件", Toast.LENGTH_SHORT).show();
       }
     }
+  }
+
+  /**
+   * 获取最新的批次ID
+   * 
+   * @return 最新的批次ID，如果没有数据则返回null
+   */
+  private String getLatestBatchId() {
+    if (allResults == null || allResults.isEmpty()) {
+      return null;
+    }
+
+    // 找到最新时间戳的记录的批次ID
+    long latestTimestamp = 0;
+    String latestBatchId = null;
+
+    for (ScanResult result : allResults) {
+      if (result.getBatchId() != null && !result.getBatchId().isEmpty()) {
+        if (result.getTimestamp() > latestTimestamp) {
+          latestTimestamp = result.getTimestamp();
+          latestBatchId = result.getBatchId();
+        }
+      }
+    }
+
+    return latestBatchId;
+  }
+
+  /**
+   * 解析二维码内容，提取发票号码、金额和日期
+   * 
+   * @param content 二维码内容
+   * @return 包含发票号码、金额、日期的数组 [发票号码, 金额, 日期]
+   */
+  private String[] parseInvoiceInfo(String content) {
+    String[] result = { "", "", "" }; // [发票号码, 金额, 日期]
+
+    if (content == null || content.trim().isEmpty()) {
+      return result;
+    }
+
+    try {
+      // 按逗号分割内容
+      String[] parts = content.split(",");
+
+      if (parts.length >= 6) {
+        // 发票号码：第4个字段（索引3）
+        if (parts.length > 3 && parts[3] != null && !parts[3].trim().isEmpty()) {
+          result[0] = parts[3].trim();
+        }
+
+        // 金额：第5个字段（索引4）
+        if (parts.length > 4 && parts[4] != null && !parts[4].trim().isEmpty()) {
+          result[1] = parts[4].trim();
+        }
+
+        // 日期：第6个字段（索引5）
+        if (parts.length > 5 && parts[5] != null && !parts[5].trim().isEmpty()) {
+          String dateStr = parts[5].trim();
+          // 如果是8位数字格式（如20250721），转换为可读格式
+          if (dateStr.matches("\\d{8}")) {
+            try {
+              String year = dateStr.substring(0, 4);
+              String month = dateStr.substring(4, 6);
+              String day = dateStr.substring(6, 8);
+              result[2] = year + "-" + month + "-" + day;
+            } catch (Exception e) {
+              result[2] = dateStr;
+            }
+          } else {
+            result[2] = dateStr;
+          }
+        }
+      }
+    } catch (Exception e) {
+      // 解析失败时返回空值
+      android.util.Log.w("HistoryActivity", "解析发票信息失败: " + e.getMessage());
+    }
+
+    return result;
   }
 }
